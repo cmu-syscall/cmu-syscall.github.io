@@ -1,0 +1,19 @@
+- name: Olivia Hsu
+  role: Faculty
+  link: https://weiya711.github.io/
+  img: "olivia.png"
+
+- name: Nikhil Agarwal
+  role: PhD
+  link: https://www.linkedin.com/in/nikhilagarwal1509
+  img: "nikhil.png"
+
+- name: Evan Williams
+  role: PhD
+  link: https://evanwilliams.pl
+  img: "evanwilliams.jpg"
+
+- name: Gaurav Shah
+  role: Masters
+  link: https://gaurav-shah05.github.io/
+  img: "gaurav.jpg"

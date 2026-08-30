@@ -1,0 +1,13 @@
+base_url = "https://syscall.ece.cmu.edu"
+compile_sass = true
+build_search_index = false
+author = "Olivia Hsu"
+
+[markdown.highlighting]
+style = "inline"
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+[link_checker]
+internal_level = "warn"
+external_level = "warn"

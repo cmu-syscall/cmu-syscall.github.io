@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+<h2>The Lab</h2>
+
+<p>
+Welcome to the lab! Here are a couple of links that you might find useful:
+</p>
+
+{% set lab = get_section(path="lab/_index.md") %}
+{% for post in lab.pages %}
+<ul>
+    <li>
+        <a href="{{ post.permalink }}">{{ post.title }}</a>
+    </li>
+</ul>
+{% endfor %}
+</section>
+
+{% endblock content %}

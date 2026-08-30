@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Olivia Hsu">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if page?.dont_index %}
+  <meta name="robots" content="noindex,nofollow">
+  {% endif %}
+  <meta name="robots" content="noindex,nofollow">
+  {% if page?.title %}
+  <title> {{ page.title }} |  CMU SysCALL </title>
+  {% else %}
+  <title>CMU SysCALL</title>
+  {% endif %}
+
+  <link rel="icon" type="image/png" href="/cmu-logo.png">
+
+  <link rel="stylesheet" href={{ get_url(path="default.css") }}>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous"/>
+
+  {% block rss %}
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="news/atom.xml", trailing_slash=false) }}">
+  {% endblock %}
+
+</head>
+
+<body>
+<div class="nav">
+<!-- Hero -->
+<div class="hero">
+  <div class="logo" style="background-image: url('/cmu-logo.png');"></div>
+  <div class="title">
+    <a href="/">
+      <h1>CMU <span class="highlight">SysCALL</span></h1>
+      <h3 class="subtitle"><b>Sys</b>tems, <b>C</b>ompilers, <b>A</b>rchitecture, and <b>L</b>anguages <b>L</b>ab</h3>
+    </a>
+  </div>
+</div>
+</div>
+
+<div class="container">
+  {% block content %}
+  {% endblock %}
+</div>
+
+<footer>
+  &copy;&nbsp;2026 Olivia Hsu &middot; Built using <a href="https://www.getzola.org/">Zola</a>
+</footer>
+</body>
+
+</html>

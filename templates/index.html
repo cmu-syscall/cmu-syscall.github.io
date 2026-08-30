@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- About  -->
+<div class="main-section">
+  <div class="about">
+    {% set page = get_page(path="about.md") %}
+    {{ page.content | safe }}
+  </div>
+
+  <h2>People</h2>
+  {% set people = load_data(path="content/people.yml", format="yaml") %}
+  {% set active = [p for p in people if not p.alum] %}
+  {{<people_section title="Faculty" members={[p for p in active if p.role == "Faculty"]} />}}
+  {{<people_section title="PhD Students" members={[p for p in active if p.role == "PhD"]} />}}
+  {{<people_section title="Masters Students" members={[p for p in active if p.role == "Masters"]} />}}
+  {{<people_section title="Undergraduate Students" members={[p for p in active if p.role == "Undergrad"]} />}}
+
+  {{<anchor_heading content="Publications" />}}
+  {% set pubs = get_section(path="publication/_index.md") %}
+
+  <!-- Conference publications, grouped by year -->
+  {% set pubs_sorted = [p for p in pubs.pages if p.extra.type == "conf"] | sort(attribute="date") | reverse %}
+  {% for year in [p.year for p in pubs_sorted] | unique %}
+  <h3 class="pub-year">{{ year }}</h3>
+  {% for pub in [p for p in pubs_sorted if p.year == year] %}
+  {{<publication pub={pub} />}}
+  {% endfor %}
+  {% endfor %}
+</div>
+
+<div class="side-section">
+<h2>News<sup>
+  <a class="unstyled-link" href="{{ get_url(path="news/atom.xml") }}">
+    <i class="fas fa-rss"></i>
+  </a>
+</sup>
+</h2>
+<span class="news">
+{% set news = get_section(path="news/_index.md") %}
+{% set items = 8 %}
+{% set recent = news.pages | sort(attribute="date") | reverse %}
+{% for post in recent[:items] %}
+{{<generate_news post={post} />}}
+{% endfor %}
+<div class="more">
+    <a href="/news">
+    All News
+    <i class="fa fa-angle-double-right"></i>
+    </a>
+</div>
+</span>
+
+<div style="padding-top: 25px;"></div>
+
+<div class="toc">
+<h2>Lab</h2>
+{% set lab_pages = get_section(path="lab/_index.md") %}
+<ul>
+  <li>
+  <a href="https://github.com/cmu-syscall" target="_blank">Github</a>
+  </li>
+  {% for page in lab_pages.pages %}
+  <li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
+  {% endfor %}
+  <li><a href="https://drive.google.com/drive/folders/0ALONN7BO4G8TUk9PVA" target="_blank">Internal Drive</a></li>
+</ul>
+</div>
+
+</div>
+{% endblock content %}

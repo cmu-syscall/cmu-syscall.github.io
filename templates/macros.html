@@ -1,0 +1,104 @@
+{# Reusable Tera v2 components. Components are registered globally — no imports needed. #}
+
+{# Heading with anchor link #}
+{% component anchor_heading(content, size = "2") %}
+<h{{size}} id="{{ content | slugify }}">
+  {{ content }}
+</h{{size}}>
+{% endcomponent anchor_heading %}
+
+{# Styling for Posts #}
+{% component generate_post(post) %}
+<div class="blurb">
+  <div class="date">{{ post.date | date(format="%b ’%y") }}</div>
+  <div class="description">
+    {% if post.extra.external %}
+    <a href="{{ post.extra.external | safe }}">
+      {% else %}
+      <a href="{{ post.permalink | safe }}">
+        {% endif %}
+        {{ post.title | safe }}
+      </a><br />
+      <div class="post-tease">
+        {{ post.extra.summary }}
+      </div>
+  </div>
+</div>
+{% endcomponent generate_post %}
+
+{# Styling for News items #}
+{% component generate_news(post) %}
+<div class="blurb">
+  <div class="date">{{ post.date | date(format="%b ’%y") }}</div>
+  <div class="description">
+    {{ post.content | safe }}
+  </div>
+</div>
+{% endcomponent generate_news %}
+
+{# Styling for a publication item #}
+{% component publication(pub) %}
+<div class="publication">
+  <span class="title">
+    {% if pub.extra.url %}
+    <a href={{ pub.extra.url }}>
+      {% endif %}
+      {{ pub.title | safe }}
+      {% if pub.extra.url %}
+    </a>
+    {% endif %}
+  </span>
+  <span class="venue">
+    &bull;
+    {% if not pub.extra.publication_short %}
+    <i>Draft</i>
+    {% else %}
+    {{- pub.extra.publication_short -}}&nbsp;{{ pub.date | date(format="’%y") }}
+    {% endif %}
+  </span>
+  <div class="authors">
+    {% for name in pub.extra.authors %}
+    {{ name }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+  </div>
+  <!-- Award -->
+  {% if pub.extra.award %}
+  <div class="award">
+    <i class="fa fa-trophy"></i>
+    <b>{{ pub.extra.award }}</b>
+  </div>
+  {% endif %}
+</div>
+{% endcomponent publication %}
+
+{% component person(info) %}
+<div class="person">
+  {% if info.img %}
+  <img src="img/{{info.img}}"/>
+  {% else %}
+  <img class="dummy" src="/cmu-logo.png"/>
+  {% endif %}
+
+  <div class="name">
+    <b>
+    {% if info.link %}
+    <a href="{{ info.link }}">{{ info.name }}</a>
+    {% else %}
+    {{ info.name }}
+    {% endif %}
+    </b>
+  </div>
+</div>
+{% endcomponent person %}
+
+{# A heading plus a grid of people; renders nothing when the group is empty #}
+{% component people_section(title, members) %}
+{% if members %}
+<h3>{{ title }}</h3>
+<div class="people">
+  {% for p in members %}
+  {{<person info={p} />}}
+  {% endfor %}
+</div>
+{% endif %}
+{% endcomponent people_section %}
