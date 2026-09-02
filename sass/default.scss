@@ -1,6 +1,9 @@
 @use "sass:color";
 @import "_theme";
 
+// Width of the centered page column (hero, content grid, and footer)
+$page-width: 1000px;
+
 $hero-size: 72px;
 
 $h1-size: 48px;
@@ -25,8 +28,9 @@ $p-after: .8em;
 }
 
 body {
+    width: 90%;
+    max-width: $page-width;
     margin: 0 auto;
-    max-width: 90%;
 
     background-color: $background;
     font-family: sans-serif, Helvetica, Arial;
@@ -37,7 +41,6 @@ body {
     text-rendering: optimizeLegibility;
     hyphens: auto;
     counter-reset: sidenote-counter;
-    margin-left: 10%;
 }
 
 %header-style {
@@ -170,7 +173,6 @@ footer {
     grid-template-columns: 2.5fr 1.2fr;
     grid-template-rows: auto;
     gap: 20px;
-    max-width: 1000px;
 }
 
 /* Main Section */
@@ -344,12 +346,6 @@ a:focus {
 }
 
 /* Responsive Layout */
-@media (max-width: 1200px) {
-  body {
-    margin: auto;
-  }
-}
-
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
