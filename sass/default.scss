@@ -201,9 +201,13 @@ footer {
 .hero {
     padding-top: 30px;
 
+    // Size the title track to its content and center the tracks, so the
+    // logo + title group sits centered over the whole page rather than
+    // hugging the left edge of the main column.
     display: grid;
-    grid-template-columns: 85px auto;
+    grid-template-columns: 85px minmax(0, max-content);
     grid-template-rows: auto;
+    justify-content: center;
     align-items: center;
     gap: 10px;
 
