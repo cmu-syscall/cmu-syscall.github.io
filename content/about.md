@@ -6,13 +6,14 @@ CMU SysCALL is a research group at [Carnegie Mellon University](https://www.cmu.
 
 ## Research
 
-### Interactive Scheduling Languages with Strong Guarantees
+### Fine-grained autoscheduler composition
 TODO
 
-### Sparse Roofline Modeling 
-TODO 
-
-### LLM Serving 
+### MStar
 TODO
 
-```
+### LLM Serving
+TODO
+
+### Heterogeneous Performance Modeling
+TODO
