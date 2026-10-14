@@ -15,15 +15,13 @@
   <title>CMU SysCALL</title>
   {% endif %}
 
-  <link rel="icon" type="image/png" href="/cmu-logo.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/syscall-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <link rel="stylesheet" href={{ get_url(path="default.css") }}>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous"/>
-
-  {% block rss %}
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="news/atom.xml", trailing_slash=false) }}">
-  {% endblock %}
 
 </head>
 
@@ -31,14 +29,20 @@
 <div class="nav">
 <!-- Hero -->
 <div class="hero">
-  <div class="logo" style="background-image: url('/cmu-logo.png');"></div>
-  <div class="title">
-    <a href="/">
-      <h1>CMU <span class="highlight">SysCALL</span></h1>
-      <h3 class="subtitle"><b>Sys</b>tems, <b>C</b>ompilers, <b>A</b>rchitecture, and <b>L</b>anguages <b>L</b>ab</h3>
-    </a>
-  </div>
+  <a href="/">
+    <img src="/syscall-banner.svg" alt="CMU SysCALL — Systems, Compilers, Architecture, and Languages Lab">
+  </a>
 </div>
+
+<!-- Lab links as tabs -->
+<nav class="topnav">
+  <a href="https://github.com/cmu-syscall" target="_blank">Github</a>
+  {% set lab_pages = get_section(path="lab/_index.md") %}
+  {% for lab_page in lab_pages.pages %}
+  <a href="{{ lab_page.permalink }}">{{ lab_page.title }}</a>
+  {% endfor %}
+  <a href="https://drive.google.com/drive/folders/0ALONN7BO4G8TUk9PVA" target="_blank">Internal Drive</a>
+</nav>
 </div>
 
 <div class="container">

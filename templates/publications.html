@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+<h2>Publications</h2>
+{% set pubs = get_section(path="publication/_index.md") %}
+{% set pubs_sorted = pubs.pages | sort(attribute="date") | reverse %}
+{{<publication_list pubs={pubs_sorted} />}}
+</section>
+
+{% endblock content %}
