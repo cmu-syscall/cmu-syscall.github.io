@@ -36,6 +36,7 @@
   {{<people_section title="PhD Students" members={[p for p in active if p.role == "PhD"]} />}}
   {{<people_section title="Masters Students" members={[p for p in active if p.role == "Masters"]} />}}
   {{<people_section title="Undergraduate Students" members={[p for p in active if p.role == "Undergrad"]} />}}
+  {{<people_section title="Collaborators" members={[p for p in active if p.role == "Collaborator"]} />}}
 
   <h2 id="publications"><a href="/publication">Publications</a></h2>
   {% set pubs = get_section(path="publication/_index.md") %}

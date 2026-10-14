@@ -21,3 +21,17 @@
   role: Masters
   link: https://gaurav-shah05.github.io/
   img: "gaurav.jpg"
+
+- name: Junwha Hong
+  role: Collaborator
+  link: https://junwha.github.io/
+  img: "junwha.jpg"
+
+- name: Humza Ikram
+  role: Collaborator
+  link: https://www.linkedin.com/in/humza-ikram-83966720b/
+
+- name: Jaehyun Lim
+  role: Collaborator
+  link: https://www.limjaehyun.com/
+  img: "jaehyun.jpeg"
