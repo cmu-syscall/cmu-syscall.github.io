@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- About  -->
 <div class="main-section">
+  <!-- About  -->
   <div class="about">
     {% set page = get_page(path="about.md") %}
     {{ page.content | safe }}
+  </div>
+
+  <!-- Latest news callout -->
+  {% set news = get_section(path="news/_index.md") %}
+  {% set recent = news.pages | sort(attribute="date") | reverse %}
+  <div class="news-box">
+    <a class="news-label" href="/news">News</a>
+    <ul>
+      {% for post in recent[:3] %}
+      <li>
+        <span class="date">{{ post.date | date(format="%b ’%y") }}</span>
+        {{ post.content | safe }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Research -->
+  <div class="research">
+    {% set research = get_page(path="research.md") %}
+    {{ research.content | safe }}
   </div>
 
   <h2>People</h2>
@@ -16,51 +37,19 @@
   {{<people_section title="Masters Students" members={[p for p in active if p.role == "Masters"]} />}}
   {{<people_section title="Undergraduate Students" members={[p for p in active if p.role == "Undergrad"]} />}}
 
-  {{<anchor_heading content="Publications" />}}
+  <h2 id="publications"><a href="/publication">Publications</a></h2>
   {% set pubs = get_section(path="publication/_index.md") %}
 
-  <!-- Conference publications, grouped by year -->
-  {% set pubs_sorted = [p for p in pubs.pages if p.extra.type == "conf"] | sort(attribute="date") | reverse %}
-  {% for year in [p.year for p in pubs_sorted] | unique %}
-  <h3 class="pub-year">{{ year }}</h3>
-  {% for pub in [p for p in pubs_sorted if p.year == year] %}
-  {{<publication pub={pub} />}}
-  {% endfor %}
-  {% endfor %}
-</div>
+  <!-- Conference publications from the last two years, grouped by year -->
+  {% set current_year = now() | date(format="%Y") | int %}
+  {% set pubs_sorted = [p for p in pubs.pages if p.extra.type == "conf" and p.year >= current_year - 1] | sort(attribute="date") | reverse %}
+  {{<publication_list pubs={pubs_sorted} />}}
 
-<div class="side-section">
-<h2>News</h2>
-<span class="news">
-{% set news = get_section(path="news/_index.md") %}
-{% set items = 8 %}
-{% set recent = news.pages | sort(attribute="date") | reverse %}
-{% for post in recent[:items] %}
-{{<generate_news post={post} />}}
-{% endfor %}
-<div class="more">
-    <a href="/news">
-    All News
+  <div class="more">
+    <a href="/publication">
+    All Publications
     <i class="fa fa-angle-double-right"></i>
     </a>
-</div>
-</span>
-
-<div style="padding-top: 25px;"></div>
-
-<div class="toc">
-<h2>Lab</h2>
-{% set lab_pages = get_section(path="lab/_index.md") %}
-<ul>
-  <li>
-  <a href="https://github.com/cmu-syscall" target="_blank">Github</a>
-  </li>
-  {% for page in lab_pages.pages %}
-  <li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
-  {% endfor %}
-  <li><a href="https://drive.google.com/drive/folders/0ALONN7BO4G8TUk9PVA" target="_blank">Internal Drive</a></li>
-</ul>
-</div>
-
+  </div>
 </div>
 {% endblock content %}

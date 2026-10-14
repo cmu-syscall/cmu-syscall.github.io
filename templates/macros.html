@@ -71,12 +71,22 @@
 </div>
 {% endcomponent publication %}
 
+{# A list of publications grouped by year; expects pubs sorted newest-first #}
+{% component publication_list(pubs) %}
+{% for year in [p.year for p in pubs] | unique %}
+<h3 class="pub-year">{{ year }}</h3>
+{% for pub in [p for p in pubs if p.year == year] %}
+{{<publication pub={pub} />}}
+{% endfor %}
+{% endfor %}
+{% endcomponent publication_list %}
+
 {% component person(info) %}
 <div class="person">
   {% if info.img %}
   <img src="img/{{info.img}}"/>
   {% else %}
-  <img class="dummy" src="/cmu-logo.png"/>
+  <img class="dummy" src="/syscall-mark.svg"/>
   {% endif %}
 
   <div class="name">
@@ -94,7 +104,7 @@
 {# A heading plus a grid of people; renders nothing when the group is empty #}
 {% component people_section(title, members) %}
 {% if members %}
-<h3>{{ title }}</h3>
+<h3 class="group-heading">{{ title }}</h3>
 <div class="people">
   {% for p in members %}
   {{<person info={p} />}}
