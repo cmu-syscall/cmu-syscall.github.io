@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Allow: /
-Sitemap: https://cmu-syscall.github.io/sitemap.xml
+Sitemap: https://syscall.ece.cmu.edu/sitemap.xml
