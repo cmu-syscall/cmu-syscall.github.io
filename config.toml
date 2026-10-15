@@ -1,4 +1,4 @@
-base_url = "https://cmu-syscall.github.io"
+base_url = "https://syscall.ece.cmu.edu"
 compile_sass = true
 build_search_index = false
 author = "Olivia Hsu"
