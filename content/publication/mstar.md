@@ -20,7 +20,7 @@ authors = [
 ]
 
 publication = "Conference on Neural Information Processing Systems"
-publication_short = "NeurIPS"
+publication_short = "to appear NeurIPS"
 url = "https://arxiv.org/abs/2606.12688"
 type="conf"
 +++
